@@ -71,7 +71,7 @@ export default function PortfolioPage() {
             transition={{ duration: 0.8 }}
             className="text-lg text-muted-foreground max-w-xl"
           >
-            Engineering Physics undergraduate interested in Machine Learning,
+            Engineering Physics undergraduate at IIT Ropar interested in Machine Learning,
             Algorithms, and building intelligent systems. I enjoy studying the 
             mathematics behind how models work. I also enjoy leading and developing
             high-impact software projects.
