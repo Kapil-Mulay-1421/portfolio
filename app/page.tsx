@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -254,6 +254,60 @@ const fadeUp = {
 
 export default function PortfolioPage() {
   const [showScrollHint, setShowScrollHint] = useState(false);
+  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const footerRef = useRef<HTMLElement | null>(null);
+
+  const setSectionRef = (index: number) => (node: HTMLElement | null) => {
+    sectionRefs.current[index] = node;
+  };
+
+  const getCurrentSectionIndex = () => {
+    const viewportTop = 140;
+
+    for (let index = 0; index < sectionRefs.current.length; index += 1) {
+      const section = sectionRefs.current[index];
+      if (!section) continue;
+
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= viewportTop && rect.bottom > viewportTop) {
+        return index;
+      }
+    }
+
+    for (let index = 0; index < sectionRefs.current.length; index += 1) {
+      const section = sectionRefs.current[index];
+      if (!section) continue;
+
+      const rect = section.getBoundingClientRect();
+      if (rect.top >= 0) {
+        return index;
+      }
+    }
+
+    return sectionRefs.current.length - 1;
+  };
+
+  const handleScrollHintClick = () => {
+    const currentSectionIndex = getCurrentSectionIndex();
+    const nextSectionIndex = currentSectionIndex + 1;
+
+    if (nextSectionIndex === 5) {
+      footerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    const nextSection = sectionRefs.current[nextSectionIndex];
+    if (!nextSection) {
+      footerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    const topOffset = 96;
+    const elementPosition = nextSection.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - topOffset;
+
+    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const updateHintVisibility = () => {
@@ -276,11 +330,13 @@ export default function PortfolioPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       {showScrollHint && (
-        <motion.div
+        <motion.button
+          type="button"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2" 
+          onClick={handleScrollHintClick}
+          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 cursor-pointer"
         >
           <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/90 px-3.5 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.32)] backdrop-blur dark:border-white/50 dark:bg-white/85">
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/90 dark:text-black">
@@ -288,12 +344,15 @@ export default function PortfolioPage() {
             </span>
             <ChevronDown className="h-4 w-4 text-teal" />
           </div>
-        </motion.div>
+        </motion.button>
       )}
 
       <div className="mx-auto max-w-5xl px-6 md:px-10 py-16 md:py-24">
         {/* Hero */}
-        <section className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
+        <section
+          ref={setSectionRef(0)}
+          className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center"
+        >
           <div className="space-y-6">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -412,7 +471,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* Experience */}
-        <motion.section {...fadeUp} className="mt-28 md:mt-36">
+        <motion.section {...fadeUp} ref={setSectionRef(1)} className="mt-28 md:mt-36">
           <NodeEyebrow tone="teal">Experience</NodeEyebrow>
           <div className="mt-8 relative pl-6 border-l border-border">
             <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-teal" />
@@ -450,7 +509,7 @@ export default function PortfolioPage() {
         </motion.section>
 
         {/* Projects */}
-        <motion.section {...fadeUp} className="mt-28 md:mt-36">
+        <motion.section {...fadeUp} ref={setSectionRef(2)} className="mt-28 md:mt-36">
           <NodeEyebrow tone="copper">Projects</NodeEyebrow>
           <h2 className="font-display text-3xl md:text-4xl font-semibold mt-4">
             Things I&apos;ve built
@@ -536,7 +595,7 @@ export default function PortfolioPage() {
         </motion.section>
 
         {/* Skills */}
-        <motion.section {...fadeUp} className="mt-28 md:mt-36">
+        <motion.section {...fadeUp} ref={setSectionRef(3)} className="mt-28 md:mt-36">
           <NodeEyebrow tone="copper">Skills</NodeEyebrow>
           <div className="mt-8 grid md:grid-cols-2 gap-6">
             {skills.map((skill) => (
@@ -560,7 +619,7 @@ export default function PortfolioPage() {
         </motion.section>
 
         {/* Leadership & Achievements */}
-        <motion.section {...fadeUp} className="mt-28 md:mt-36 grid md:grid-cols-2 gap-12">
+        <motion.section {...fadeUp} ref={setSectionRef(4)} className="mt-28 md:mt-36 grid md:grid-cols-2 gap-12">
           <div>
             <NodeEyebrow tone="teal">Leadership</NodeEyebrow>
             <div className="mt-8 relative pl-6 border-l border-border space-y-7">
@@ -609,7 +668,10 @@ export default function PortfolioPage() {
         </motion.section>
 
         {/* Footer */}
-        <footer className="mt-28 md:mt-36 pt-10 border-t border-border text-sm text-muted-foreground flex flex-col md:flex-row justify-between gap-4">
+        <footer
+          ref={footerRef}
+          className="mt-28 md:mt-36 pt-10 border-t border-border text-sm text-muted-foreground flex flex-col md:flex-row justify-between gap-4"
+        >
           <p>© {new Date().getFullYear()} Kapil Mulay. All rights reserved.</p>
           <div className="flex gap-6">
             <a
