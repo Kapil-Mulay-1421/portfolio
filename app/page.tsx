@@ -166,7 +166,7 @@ export default function PortfolioPage() {
           {[
 {
 title: "Programming",
-items: ["C++", "Python", "PHP", "TypeScript", "JavaScript", "Solidity"],
+items: ["C++", "Python", "PHP", "TypeScript", "JavaScript", "Solidity", "Verilog"],
 },
 {
 title: "AI / Machine Learning",
