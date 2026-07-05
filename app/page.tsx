@@ -68,7 +68,7 @@ const projects: {
       "A cloud-native IoT platform for water-quality monitoring — from sensor to dashboard. Electrochemical sensor nodes located at the water source publish live readings over MQTT to the nearest server, eliminating the need for manual sampling.",
     bullets: [
       "Data pipeline: ESP32 sensor node → MQTT (HiveMQ Cloud) → ML Model → MongoDB Atlas via Prisma",
-      "ML model for water-potability prediction from real-time sensor readings and a Next.js frontend for visualizaiton.",
+      "ML model for water-potability prediction from real-time sensor readings and a Next.js frontend for visualization.",
       "Automated deployment to Hugging Face Spaces through GitHub Actions CI/CD",
     ],
     tech: ["TypeScript", "Next.js", "MQTT", "MongoDB Atlas", "Prisma", "ESP32"],
@@ -98,7 +98,7 @@ const projects: {
     domain: "software",
     period: "2022 — 2023",
     description:
-      "A production-ready e-commerce platform covering the whole purchase loop — user authentication, email verification, catalogue surfing, inventory management, order processing workflows, and payment gateways. This full-stack web app also supports store-preference selection by the customer.",
+      "A production-ready e-commerce platform covering the whole purchase loop — user authentication, email verification, catalog browsing, inventory management, order processing workflows, and payment gateways. This full-stack web app also supports store-preference selection by the customer.",
     bullets: [
       "Relational MySQL schema for Users, Products, Orders, and Transactions",
       "Razorpay checkout with automated confirmation and notification emails",
