@@ -9,6 +9,7 @@ declare module "lucide-react" {
   export const ArrowUpRight: any;
   export const Download: any;
   export const GraduationCap: any;
+  export const ChevronDown: any;
   const _default: any;
   export default _default;
 }
