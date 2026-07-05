@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import {
   ArrowUpRight,
   Download,
   GraduationCap,
+  ChevronDown,
 } from "lucide-react";
 
 type Domain = "software" | "systems";
@@ -251,8 +253,44 @@ const fadeUp = {
 };
 
 export default function PortfolioPage() {
+  const [showScrollHint, setShowScrollHint] = useState(false);
+
+  useEffect(() => {
+    const updateHintVisibility = () => {
+      const scrollable = document.documentElement.scrollHeight > window.innerHeight + 1;
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+      setShowScrollHint(scrollable && !nearBottom);
+    };
+
+    updateHintVisibility();
+    window.addEventListener("scroll", updateHintVisibility, { passive: true });
+    window.addEventListener("resize", updateHintVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", updateHintVisibility);
+      window.removeEventListener("resize", updateHintVisibility);
+    };
+  }, []);
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      {showScrollHint && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2" 
+        >
+          <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/90 px-3.5 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.32)] backdrop-blur dark:border-white/50 dark:bg-white/85">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/90 dark:text-black">
+              Scroll
+            </span>
+            <ChevronDown className="h-4 w-4 text-teal" />
+          </div>
+        </motion.div>
+      )}
+
       <div className="mx-auto max-w-5xl px-6 md:px-10 py-16 md:py-24">
         {/* Hero */}
         <section className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
@@ -345,6 +383,7 @@ export default function PortfolioPage() {
             >
               <Waveform className="h-10 w-full max-w-sm text-muted-foreground" />
             </motion.div>
+
           </div>
 
           <motion.div
