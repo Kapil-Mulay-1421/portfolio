@@ -2,39 +2,131 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------------------------------------------------
+   Design tokens
+   Light mode: cool graphite-tinted paper, not warm cream
+   Dark mode: graphite ink board, the site's primary identity
+   Two accents: Signal Copper (build/ship) + Scope Teal (systems/signal)
+--------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F1F2F4;
+  --foreground: #14171C;
+
+  --card: #FFFFFF;
+  --card-foreground: #14171C;
+
+  --muted: #E5E7EB;
+  --muted-foreground: #565F6C;
+
+  --border: #D7DBE0;
+  --input: #D7DBE0;
+  --ring: #B5691F;
+
+  --primary: #B5691F;
+  --primary-foreground: #FBF7F2;
+
+  --teal: #1F8F82;
+  --teal-foreground: #FBF7F2;
+}
+
+html.dark {
+  --background: #12151A;
+  --foreground: #EBEDF0;
+
+  --card: #171B22;
+  --card-foreground: #EBEDF0;
+
+  --muted: #1C2129;
+  --muted-foreground: #8B93A1;
+
+  --border: #262C36;
+  --input: #262C36;
+  --ring: #E8934A;
+
+  --primary: #E8934A;
+  --primary-foreground: #141414;
+
+  --teal: #4FD1C5;
+  --teal-foreground: #0B1512;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #12151A;
+    --foreground: #EBEDF0;
+    --card: #171B22;
+    --card-foreground: #EBEDF0;
+    --muted: #1C2129;
+    --muted-foreground: #8B93A1;
+    --border: #262C36;
+    --input: #262C36;
+    --ring: #E8934A;
+    --primary: #E8934A;
+    --primary-foreground: #141414;
+    --teal: #4FD1C5;
+    --teal-foreground: #0B1512;
+  }
+}
+
+html.light {
+  --background: #F1F2F4;
+  --foreground: #14171C;
+  --card: #FFFFFF;
+  --card-foreground: #14171C;
+  --muted: #E5E7EB;
+  --muted-foreground: #565F6C;
+  --border: #D7DBE0;
+  --input: #D7DBE0;
+  --ring: #B5691F;
+  --primary: #B5691F;
+  --primary-foreground: #FBF7F2;
+  --teal: #1F8F82;
+  --teal-foreground: #FBF7F2;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-teal: var(--teal);
+  --color-teal-foreground: var(--teal-foreground);
+
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* Explicit dark mode when `dark` class is present on <html> */
-html.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-/* Force light when `light` class is present on <html> */
-html.light {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plex-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
