@@ -80,7 +80,7 @@ const projects: {
     domain: "systems",
     period: "Feb 2026 — Jul 2026",
     description:
-      "A 5-stage pipelined MIPS32-style CPU written from scratch in Verilog. Contains the datapath, control path, 32x32-bit register bank and 4KB instruction/data memory, and is capable of processing several assembly language instructions in prallel.",
+      "A 5-stage pipelined MIPS32-style CPU written from scratch in Verilog. Contains the datapath, control path, 32x32-bit register bank and 4KB instruction/data memory, and is capable of processing several assembly language instructions in parallel.",
     bullets: [
       "Full datapath and control path, with immediate generation and branch handling",
       "5-stage pipeline (IF · ID · EX · MEM · WB) for arithmetic, load/store, and branch instructions",
