@@ -338,7 +338,7 @@ export default function PortfolioPage() {
           onClick={handleScrollHintClick}
           className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 cursor-pointer"
         >
-          <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/90 px-3.5 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.32)] backdrop-blur dark:border-white/50 dark:bg-white/85">
+          <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/90 px-3.5 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.32)] backdrop-blur dark:border-white/50 dark:bg-white/95">
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/90 dark:text-black">
               Scroll
             </span>
