@@ -410,7 +410,7 @@ export default function PortfolioPage() {
                 </Button>
               </a>
               <a
-                href="/kapil-mulay-resume.pdf"
+                href="/kapil-mulay-cv.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
