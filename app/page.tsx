@@ -22,6 +22,25 @@ const domainLabel: Record<Domain, string> = {
   systems: "Systems / RTL",
 };
 
+const getProjectBadgeLabel = (projectTitle: string, domain: Domain) => {
+  switch (projectTitle) {
+    case "NeuroGAN":
+      return "Machine Learning";
+    case "HydroSense":
+      return "IoT Systems";
+    case "Grabbit":
+      return "Full-Stack Engineering";
+    case "Maze Solver":
+      return "Embedded Robotics";
+    case "ZenoVerse":
+      return "Blockchain + Computer Vision";
+    case "Prompt Forge":
+      return "Agentic Web App";
+    default:
+      return domainLabel[domain];
+  }
+};
+
 // Copper reads as literal metal/PCB traces -> bare-metal systems work.
 // Teal reads as a scope/screen glow -> software.
 const domainTone: Record<Domain, { text: string; bg: string; border: string }> = {
@@ -533,7 +552,7 @@ export default function PortfolioPage() {
                         <span
                           className={`font-mono text-[11px] tracking-[0.15em] uppercase ${domainTone[project.domain].text}`}
                         >
-                          {domainLabel[project.domain]}
+                          {getProjectBadgeLabel(project.title, project.domain)}
                         </span>
                         <h3 className="font-display text-lg md:text-xl font-semibold mt-1">
                           {project.title}
