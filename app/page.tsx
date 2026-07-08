@@ -27,7 +27,7 @@ const getProjectBadgeLabel = (projectTitle: string, domain: Domain) => {
     case "NeuroGAN":
       return "Machine Learning";
     case "HydroSense":
-      return "IoT Systems";
+      return "IoT & Embedded";
     case "Grabbit":
       return "Full-Stack Engineering";
     case "Maze Solver":
@@ -35,7 +35,7 @@ const getProjectBadgeLabel = (projectTitle: string, domain: Domain) => {
     case "ZenoVerse":
       return "Blockchain + Computer Vision";
     case "Prompt Forge":
-      return "Agentic Web App";
+      return "Agentic AI";
     default:
       return domainLabel[domain];
   }
