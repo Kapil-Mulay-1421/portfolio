@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeToggle from "@/components/theme-toggle";
+import { Analytics } from "@vercel/analytics/next"
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",

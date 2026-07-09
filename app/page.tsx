@@ -691,7 +691,7 @@ export default function PortfolioPage() {
           ref={footerRef}
           className="mt-28 md:mt-36 pt-10 border-t border-border text-sm text-muted-foreground flex flex-col md:flex-row justify-between gap-4"
         >
-          <p>© {new Date().getFullYear()} Kapil Mulay. All rights reserved.</p>
+          <p>© 2026 Kapil Mulay. All rights reserved.</p>
           <div className="flex gap-6">
             <a
               className="hover:text-primary transition-colors"
