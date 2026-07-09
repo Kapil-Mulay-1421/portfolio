@@ -42,6 +42,7 @@ export default function RootLayout({
           <ThemeToggle />
         </div>
         {children}
+        <Analytics />
       </body>
     </html>
   );
