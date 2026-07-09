@@ -35,7 +35,7 @@ const getProjectBadgeLabel = (projectTitle: string, domain: Domain) => {
     case "ZenoVerse":
       return "Blockchain + Computer Vision";
     case "Prompt Forge":
-      return "Agentic AI";
+      return "Generative AI";
     default:
       return domainLabel[domain];
   }
